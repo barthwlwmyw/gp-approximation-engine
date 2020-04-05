@@ -6,7 +6,13 @@
 #define GP_ENG_API __declspec(dllimport)
 #endif
 
+#include <string>
+
+using namespace std;
 
 extern "C" GP_ENG_API int do_stuff(int a, int b);
 
-extern "C" GP_ENG_API void callback_test(void __stdcall cb(int));
+extern "C" GP_ENG_API void callback_test(
+	void __stdcall onProgress(int),
+	void __stdcall onFinish(char*),
+	char* guid);
