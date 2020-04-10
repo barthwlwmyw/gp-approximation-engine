@@ -11,15 +11,15 @@ int do_stuff(int a, int b)
 }
 
 void callback_test(
-	void __stdcall onProgress(int),
+	void __stdcall onProgress(char*, int),
 	void __stdcall onFinish(char*),
 	char* guid)
 {
 	Sleep(2000);
 
-	for (int i = 0; i < 40; i++) {
-		onProgress(i);
-		Sleep(250);
+	for (int i = 1; i <= 100; i++) {
+		onProgress(guid, i);
+		Sleep(80);
 	}
 
 	ofstream myfile;

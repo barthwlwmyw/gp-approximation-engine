@@ -13,6 +13,6 @@ using namespace std;
 extern "C" GP_ENG_API int do_stuff(int a, int b);
 
 extern "C" GP_ENG_API void callback_test(
-	void __stdcall onProgress(int),
+	void __stdcall onProgress(char*, int),
 	void __stdcall onFinish(char*),
 	char* guid);
