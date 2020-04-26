@@ -13,7 +13,12 @@ int do_stuff(int a, int b)
 void callback_test(
 	void __stdcall onProgress(char*, int),
 	void __stdcall onFinish(char*),
-	char* guid)
+	char* guid,
+	char* datafilePath,
+	int populationSize,
+	int generationsNumber, 
+	double crossoverProbability, 
+	double mutationProbability)
 {
 	Sleep(2000);
 
@@ -24,7 +29,12 @@ void callback_test(
 
 	ofstream myfile;
 	myfile.open("example.txt");
-	myfile << guid;
+	myfile << guid << endl;
+	myfile << datafilePath << endl;
+	myfile << populationSize <<endl;
+	myfile << generationsNumber << endl;
+	myfile << crossoverProbability << endl;
+	myfile << mutationProbability << endl;
 	myfile.close();
 
 	onFinish(guid);

@@ -15,4 +15,9 @@ extern "C" GP_ENG_API int do_stuff(int a, int b);
 extern "C" GP_ENG_API void callback_test(
 	void __stdcall onProgress(char*, int),
 	void __stdcall onFinish(char*),
-	char* guid);
+	char* guid,
+	char* datafilePath,
+	int populationSize,
+	int generationsNumber,
+	double crossoverProbability, 
+	double mutationProbability);
