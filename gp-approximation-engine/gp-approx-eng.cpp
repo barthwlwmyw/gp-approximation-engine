@@ -11,7 +11,7 @@ int do_stuff(int a, int b)
 }
 
 void callback_test(
-	void __stdcall onProgress(char*, int),
+	void __stdcall onProgress(char*, int, double*, int),
 	void __stdcall onFinish(char*),
 	char* guid,
 	char* datafilePath,
@@ -22,8 +22,10 @@ void callback_test(
 {
 	Sleep(2000);
 
+	double foo[] = { 0.1, 0.3, 0.5, 0.6, 0.64,0.4, -0.1, -2 };
+
 	for (int i = 1; i <= 100; i++) {
-		onProgress(guid, i);
+		onProgress(guid, i, foo, 8);
 		Sleep(80);
 	}
 
@@ -39,3 +41,8 @@ void callback_test(
 
 	onFinish(guid);
 }
+
+void incrementFoo(double* foo, int size) {
+
+}
+
