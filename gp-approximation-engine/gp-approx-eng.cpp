@@ -4,10 +4,21 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <time.h>
 
 int do_stuff(int a, int b)
 {
 	return a + b;
+}
+
+
+void doStuffInFoo(double* foo, int size) {
+	
+
+	for (int i = 0; i < size; i++) {
+		foo[i] = foo[i] + (std::rand() % 5) - 2;
+	}
 }
 
 void callback_test(
@@ -20,12 +31,15 @@ void callback_test(
 	double crossoverProbability, 
 	double mutationProbability)
 {
-	Sleep(2000);
+	srand(time(NULL));
+	Sleep(80);
 
-	double foo[] = { 0.1, 0.3, 0.5, 0.6, 0.64,0.4, -0.1, -2 };
+	double foo[] = { 0.1, 0.3, 0.5, 0.6, 0.64, 0.4, -0.1, -2 };
+	int fooLength = 8;
 
 	for (int i = 1; i <= 100; i++) {
-		onProgress(guid, i, foo, 8);
+		onProgress(guid, i, foo, fooLength);
+		doStuffInFoo(foo, fooLength);
 		Sleep(80);
 	}
 
@@ -41,8 +55,3 @@ void callback_test(
 
 	onFinish(guid);
 }
-
-void incrementFoo(double* foo, int size) {
-
-}
-
