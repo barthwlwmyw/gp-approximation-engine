@@ -12,7 +12,6 @@ int do_stuff(int a, int b)
 	return a + b;
 }
 
-
 void doStuffInFoo(double* foo, int size) {
 	
 
@@ -21,8 +20,29 @@ void doStuffInFoo(double* foo, int size) {
 	}
 }
 
+struct GenerationMetadata {
+	double bestFitness, averageFitness, worstFitness;
+	GenerationMetadata(double b, double a, double w) {
+		bestFitness = b;
+		averageFitness = a;
+		worstFitness = w;
+	}
+};
+
+void doStuffInGenerationMetadata(GenerationMetadata* foo) {
+
+	foo->bestFitness = foo->bestFitness / 1.2;
+	foo->averageFitness = foo->averageFitness / 1.1;
+	foo->worstFitness = foo->worstFitness / 1.05;
+}
+
 void callback_test(
-	void __stdcall onProgress(char*, int, double*, int),
+	void __stdcall onProgress(
+		char* guid,
+		int progress,
+		double* evalValues,
+		int evalValuesLength,
+		GenerationMetadata foo3),
 	void __stdcall onFinish(char*),
 	char* guid,
 	char* datafilePath,
@@ -37,9 +57,13 @@ void callback_test(
 	double foo[] = { 0.1, 0.3, 0.5, 0.6, 0.64, 0.4, -0.1, -2 };
 	int fooLength = 8;
 
+	struct GenerationMetadata *foo2 = new struct GenerationMetadata(-50,-100,-150);
+
+
 	for (int i = 1; i <= 100; i++) {
-		onProgress(guid, i, foo, fooLength);
+		onProgress(guid, i, foo, fooLength, *foo2);
 		doStuffInFoo(foo, fooLength);
+		doStuffInGenerationMetadata(foo2);
 		Sleep(80);
 	}
 
