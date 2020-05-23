@@ -13,6 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Tree">
+      <UniqueIdentifier>{0fd9ac72-3956-49a9-a9d1-ccce23b8fdc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tree">
+      <UniqueIdentifier>{c3a388b6-e94f-49d1-a14a-fa202a1abb6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes">
+      <UniqueIdentifier>{36e504f7-d556-42c4-804b-e0fa543c2190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes\SingleChild">
+      <UniqueIdentifier>{26daf901-3d0f-4d1a-8574-5cb35d4bc045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes\DoubleChild">
+      <UniqueIdentifier>{37bac596-6dd6-4f6c-9e90-7c3d1d6ccfc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes\Leaf">
+      <UniqueIdentifier>{85b9ce3d-1725-4c32-a79a-00d2ef9af1ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes">
+      <UniqueIdentifier>{5e3e134d-a24d-4d33-9e49-41e31bb591ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes\DoubleChild">
+      <UniqueIdentifier>{489376b0-0e6b-42f5-a611-a8e0f8312989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes\SingleChild">
+      <UniqueIdentifier>{6dd6f492-2a30-4524-b742-2d3070df33a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes\Leaf">
+      <UniqueIdentifier>{27be2b2c-19b1-4808-9d7e-7d6af38e4584}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -24,6 +54,54 @@
     <ClInclude Include="gp-approx-eng.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DataLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AlgorithmInputData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeNode.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeNodeFactory.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="AdditionNode.h">
+      <Filter>Header Files\Nodes\DoubleChild</Filter>
+    </ClInclude>
+    <ClInclude Include="SubtractionNode.h">
+      <Filter>Header Files\Nodes\DoubleChild</Filter>
+    </ClInclude>
+    <ClInclude Include="DoubleChildNode.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleChildNode.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Leaf.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplicationNode.h">
+      <Filter>Header Files\Nodes\DoubleChild</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantLeaf.h">
+      <Filter>Header Files\Nodes\Leaf</Filter>
+    </ClInclude>
+    <ClInclude Include="CosinusNode.h">
+      <Filter>Header Files\Nodes\SingleChild</Filter>
+    </ClInclude>
+    <ClInclude Include="SinusNode.h">
+      <Filter>Header Files\Nodes\SingleChild</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableLeaf.h">
+      <Filter>Header Files\Nodes\Leaf</Filter>
+    </ClInclude>
+    <ClInclude Include="DivisionNode.h">
+      <Filter>Header Files\Nodes\DoubleChild</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -34,6 +112,54 @@
     </ClCompile>
     <ClCompile Include="gp-approx-eng.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AlgorithmInputData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Source Files\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeNode.cpp">
+      <Filter>Source Files\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeNodeFactory.cpp">
+      <Filter>Source Files\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="AdditionNode.cpp">
+      <Filter>Source Files\Nodes\DoubleChild</Filter>
+    </ClCompile>
+    <ClCompile Include="SubtractionNode.cpp">
+      <Filter>Source Files\Nodes\DoubleChild</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleChildNode.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="DoubleChildNode.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Leaf.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplicationNode.cpp">
+      <Filter>Source Files\Nodes\DoubleChild</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantLeaf.cpp">
+      <Filter>Source Files\Nodes\Leaf</Filter>
+    </ClCompile>
+    <ClCompile Include="CosinusNode.cpp">
+      <Filter>Source Files\Nodes\SingleChild</Filter>
+    </ClCompile>
+    <ClCompile Include="DivisionNode.cpp">
+      <Filter>Source Files\Nodes\DoubleChild</Filter>
+    </ClCompile>
+    <ClCompile Include="SinusNode.cpp">
+      <Filter>Source Files\Nodes\SingleChild</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableLeaf.cpp">
+      <Filter>Source Files\Nodes\Leaf</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
