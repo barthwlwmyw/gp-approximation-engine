@@ -16,7 +16,8 @@ extern "C" GP_ENG_API void runApproximation(
 		int evalValuesLength,
 		GenerationMetadata genMetadata),
 	void __stdcall onFinish(
-		char* guid),
+		char* guid, 
+		char* treeFormula),
 	char* guid,
 	char* datafilePath,
 	int populationSize,

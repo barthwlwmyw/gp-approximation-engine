@@ -164,7 +164,9 @@ void runApproximation(
 		double* evalValues,
 		int evalValuesLength,
 		GenerationMetadata genMeta),
-	void __stdcall onFinish(char* guid),
+	void __stdcall onFinish(
+		char* guid,
+		char* treeFormula),
 	char* guid,
 	char* datafilePath,
 	int populationSize,
@@ -210,5 +212,10 @@ void runApproximation(
 	delete dl;
 	delete ad;
 
-	onFinish(guid);
+	std::string testFormula = "+12";
+
+	char* treeFormulaCharArray = new char[testFormula.length() + 1];
+	strcpy(treeFormulaCharArray, testFormula.c_str());
+
+	onFinish(guid, treeFormulaCharArray);
 }
