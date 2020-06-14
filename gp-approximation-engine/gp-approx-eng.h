@@ -6,22 +6,17 @@
 #define GP_ENG_API __declspec(dllimport)
 #endif
 
-#include <string>
-
-using namespace std;
-
 struct GenerationMetadata;
 
-extern "C" GP_ENG_API int do_stuff(int a, int b);
-
-extern "C" GP_ENG_API void callback_test(
+extern "C" GP_ENG_API void runApproximation(
 	void __stdcall onProgress(
 		char* guid,
 		int progress,
 		double* evalValues,
 		int evalValuesLength,
-		GenerationMetadata foo3),
-	void __stdcall onFinish(char*),
+		GenerationMetadata genMetadata),
+	void __stdcall onFinish(
+		char* guid),
 	char* guid,
 	char* datafilePath,
 	int populationSize,

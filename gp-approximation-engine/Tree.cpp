@@ -74,7 +74,12 @@ TreeNode* Tree::cloneSubtree(int nodeIdx) {
 }
 
 double Tree::evaluate(double* varValues) {
-	return root->evaluate(varValues);
+	
+	double result = root->evaluate(varValues);
+	
+	return std::isinf(result) ?
+		DBL_MAX :
+		result;
 }
 
 int Tree::getTreeSize() {
