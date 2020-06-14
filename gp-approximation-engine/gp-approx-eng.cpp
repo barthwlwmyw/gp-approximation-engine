@@ -13,15 +13,11 @@
 #include <time.h>
 #include <math.h> 
 
-
-
-
 struct GenerationMetadata {
-	double bestFitness, averageFitness, worstFitness;
-	GenerationMetadata(double b, double a, double w) {
-		bestFitness = b;
-		averageFitness = a;
-		worstFitness = w;
+	double bestFitness, bestFitnessInGeneration;
+	GenerationMetadata(double bstFit, double bstFitnessInGen) {
+		bestFitness = bstFit;
+		bestFitnessInGeneration = bstFitnessInGen;
 	}
 };
 
@@ -46,22 +42,42 @@ double calculateFitness(Tree* tree, AlgorithmInputData* ad) {
 	return fitness;
 }
 
+void fixPopulation(
+	Tree**& population,
+	double*& fitnessVals,
+	AlgorithmInputData* algData,
+	int populationSize) {
+
+	for (int i = 0; i < populationSize; i++) {
+		while (std::isinf(fitnessVals[i])) {
+			delete population[i];
+			population[i] = new Tree(algData->dimensions);
+			population[i]->generateRandom();
+			fitnessVals[i] = calculateFitness(population[i], algData);
+		}
+	}
+}
+
 void evaluate(
 	Tree** population,
 	double*& fitnessVals,
 	double*& bestTreeEvalValues,
 	AlgorithmInputData* algData,
 	int populationSize,
-	GenerationMetadata* genMetadata) {
+	GenerationMetadata*& genMetadata) {
 
 	double bestFitness = calculateFitness(population[0], algData);
-
+	
 	int bestTreeIdx = 0;
 
 
 	for (int i = 0; i < populationSize; i++) {
 		fitnessVals[i] = calculateFitness(population[i], algData);
+	}
 
+	fixPopulation(population, fitnessVals, algData, populationSize);
+
+	for (int i = 0; i < populationSize; i++) {
 		if (fitnessVals[i] > bestFitness) {
 			bestFitness = fitnessVals[i];
 			bestTreeIdx = i;
@@ -69,10 +85,15 @@ void evaluate(
 	}
 
 	for (int i = 0; i < algData->datasetSize; i++) {
-		bestTreeEvalValues[i] = population[i]->evaluate(algData->variablesValues[i]);
+		bestTreeEvalValues[i] = population[bestTreeIdx]->evaluate(algData->variablesValues[i]);
 	}
 
-	genMetadata->bestFitness = bestFitness;
+	genMetadata->bestFitnessInGeneration = bestFitness;
+
+	double bestFitnessSoFar = genMetadata->bestFitness;
+	if (bestFitness > bestFitnessSoFar) {
+		genMetadata->bestFitness = bestFitness;
+	}
 
 }
 
@@ -142,7 +163,7 @@ void runApproximation(
 		int progress,
 		double* evalValues,
 		int evalValuesLength,
-		GenerationMetadata foo3),
+		GenerationMetadata genMeta),
 	void __stdcall onFinish(char* guid),
 	char* guid,
 	char* datafilePath,
@@ -153,7 +174,7 @@ void runApproximation(
 {
 	srand(time(NULL));
 
-	struct GenerationMetadata* generationMetadata = new struct GenerationMetadata(0,0,0);
+	struct GenerationMetadata* generationMetadata = new struct GenerationMetadata(-DBL_MAX, -DBL_MAX);
 
 	//------------------------------------------------------
 
@@ -171,12 +192,14 @@ void runApproximation(
 	Tree** population = initiatePopulation(POP_SIZE, ad);
 	evaluate(population, fitnessValues, bestTreeEvaluatedValues, ad, POP_SIZE, generationMetadata);
 
+
 	for (int i = 0; i < GEN_NUM; i++) {
 
 		select(population, POP_SIZE, ad->dimensions, fitnessValues);
 		mutate(population, POP_SIZE, MUT_PROB);
 		crossover(population, POP_SIZE, CROSS_PROB);
 		evaluate(population, fitnessValues, bestTreeEvaluatedValues, ad, POP_SIZE, generationMetadata);
+		
 
 		onProgress(guid, ceil(i * 100 / GEN_NUM), bestTreeEvaluatedValues, ad->datasetSize, *generationMetadata);
 	}
