@@ -41,11 +41,9 @@ Tree** initiatePopulation(int populationSize, AlgorithmInputData* algorithmData)
 double calculateFitness(Tree* tree, AlgorithmInputData* ad) {
 	double fitness = 0;
 	for (int i = 0; i < ad->datasetSize; i++) {
-		fitness += pow(ad->resultsValues[i] - tree->evaluate(ad->variablesValues[i]), 2);
+		fitness -= pow(ad->resultsValues[i] - tree->evaluate(ad->variablesValues[i]), 2);
 	}
-	return std::isinf(fitness) ?
-		DBL_MAX :
-		fitness;
+	return fitness;
 }
 
 void evaluate(
@@ -57,8 +55,6 @@ void evaluate(
 	GenerationMetadata* genMetadata) {
 
 	double bestFitness = calculateFitness(population[0], algData);
-	double sumFitness = bestFitness;
-	double worstFitness = bestFitness;
 
 	int bestTreeIdx = 0;
 
@@ -66,24 +62,17 @@ void evaluate(
 	for (int i = 0; i < populationSize; i++) {
 		fitnessVals[i] = calculateFitness(population[i], algData);
 
-		if (fitnessVals[i] < bestFitness) {
+		if (fitnessVals[i] > bestFitness) {
 			bestFitness = fitnessVals[i];
 			bestTreeIdx = i;
 		}
-		if (fitnessVals[i] > worstFitness) {
-			worstFitness = fitnessVals[i];
-		}
-		sumFitness += fitnessVals[i];
 	}
 
 	for (int i = 0; i < algData->datasetSize; i++) {
 		bestTreeEvalValues[i] = population[i]->evaluate(algData->variablesValues[i]);
 	}
-	if (isinf(sumFitness)) sumFitness = DBL_MAX;
-	// genMetadata->averageFitness = sumFitness / (double)populationSize;
-	genMetadata->averageFitness = 0;
+
 	genMetadata->bestFitness = bestFitness;
-	genMetadata->worstFitness = 0;
 
 }
 
@@ -97,7 +86,7 @@ Tree* selectTree(Tree**& population, int popSize, double* fitnessValues) {
 	for (int i = 0; i < TOURNAMENT_SIZE; i++) {
 		int randomIdx = std::rand() % popSize;
 
-		if (fitnessValues[randomIdx] < fitnessValues[winnerIdx]) {
+		if (fitnessValues[randomIdx] > fitnessValues[winnerIdx]) {
 			winnerIdx = randomIdx;
 		}
 	}
