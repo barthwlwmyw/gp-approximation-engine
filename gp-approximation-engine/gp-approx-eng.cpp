@@ -85,15 +85,18 @@ void evaluate(
 		}
 	}
 
-	for (int i = 0; i < algData->datasetSize; i++) {
-		bestTreeEvalValues[i] = population[bestTreeIdx]->evaluate(algData->variablesValues[i]);
-	}
+	
 
 	genMetadata->bestFitnessInGeneration = bestFitness;
 
 	double bestFitnessSoFar = genMetadata->bestFitness;
 	if (bestFitness > bestFitnessSoFar) {
 		genMetadata->bestFitness = bestFitness;
+
+		for (int i = 0; i < algData->datasetSize; i++) {
+			bestTreeEvalValues[i] = population[bestTreeIdx]->evaluate(algData->variablesValues[i]);
+		}
+
 		delete bestSolution;
 		bestSolution = population[bestTreeIdx]->clone();
 	}
