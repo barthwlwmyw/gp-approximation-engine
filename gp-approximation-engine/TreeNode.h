@@ -1,4 +1,5 @@
 #pragma once
+#include<string>
 
 class TreeNode
 {
@@ -19,5 +20,5 @@ public:
 
 	virtual int getSize();
 
-	virtual void print();
+	virtual std::string toString();
 };

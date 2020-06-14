@@ -60,6 +60,7 @@ void fixPopulation(
 
 void evaluate(
 	Tree** population,
+	Tree*& bestSolution,
 	double*& fitnessVals,
 	double*& bestTreeEvalValues,
 	AlgorithmInputData* algData,
@@ -93,6 +94,8 @@ void evaluate(
 	double bestFitnessSoFar = genMetadata->bestFitness;
 	if (bestFitness > bestFitnessSoFar) {
 		genMetadata->bestFitness = bestFitness;
+		delete bestSolution;
+		bestSolution = population[bestTreeIdx]->clone();
 	}
 
 }
@@ -192,7 +195,9 @@ void runApproximation(
 	double* bestTreeEvaluatedValues = new double[ad->datasetSize];
 
 	Tree** population = initiatePopulation(POP_SIZE, ad);
-	evaluate(population, fitnessValues, bestTreeEvaluatedValues, ad, POP_SIZE, generationMetadata);
+	Tree* bestSolution = population[0]->clone();
+
+	evaluate(population, bestSolution, fitnessValues, bestTreeEvaluatedValues, ad, POP_SIZE, generationMetadata);
 
 
 	for (int i = 0; i < GEN_NUM; i++) {
@@ -200,22 +205,25 @@ void runApproximation(
 		select(population, POP_SIZE, ad->dimensions, fitnessValues);
 		mutate(population, POP_SIZE, MUT_PROB);
 		crossover(population, POP_SIZE, CROSS_PROB);
-		evaluate(population, fitnessValues, bestTreeEvaluatedValues, ad, POP_SIZE, generationMetadata);
+		evaluate(population, bestSolution, fitnessValues, bestTreeEvaluatedValues, ad, POP_SIZE, generationMetadata);
 		
 
 		onProgress(guid, ceil(i * 100 / GEN_NUM), bestTreeEvaluatedValues, ad->datasetSize, *generationMetadata);
 	}
-	evaluate(population, fitnessValues, bestTreeEvaluatedValues, ad, POP_SIZE, generationMetadata);
+	evaluate(population, bestSolution, fitnessValues, bestTreeEvaluatedValues, ad, POP_SIZE, generationMetadata);
+
+
+
+	std::string testFormula = population[0]->toString();
+	char* treeFormulaCharArray = new char[testFormula.length() + 1];
+	strcpy(treeFormulaCharArray, testFormula.c_str());
+
+	onFinish(guid, treeFormulaCharArray);
+
 
 	deletePopulation(population, POP_SIZE);
 
 	delete dl;
 	delete ad;
 
-	std::string testFormula = "+12";
-
-	char* treeFormulaCharArray = new char[testFormula.length() + 1];
-	strcpy(treeFormulaCharArray, testFormula.c_str());
-
-	onFinish(guid, treeFormulaCharArray);
 }

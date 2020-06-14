@@ -21,7 +21,6 @@ double CosinusNode::evaluate(double* varVals) {
 	return cos(child->evaluate(varVals));
 }
 
-void CosinusNode::print() {
-	std::cout << "COS ";
-	child->print();
+std::string CosinusNode::toString() {
+	return "COS ";
 }

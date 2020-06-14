@@ -1,5 +1,7 @@
 #include "pch.h"
-#include<iostream>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
 #include "ConstantLeaf.h"
 
 ConstantLeaf::ConstantLeaf(double val) :Leaf() {
@@ -16,10 +18,13 @@ TreeNode* ConstantLeaf::clone() {
 	return newNode;
 }
 
-void ConstantLeaf::print() {
-	std::cout << "CONST(" << value << ") ";
+std::string  ConstantLeaf::toString() {
+	std::stringstream stream;
+	stream << std::fixed << std::setprecision(2) << value;
+	return stream.str() + " ";
 }
 
 double ConstantLeaf::evaluate(double* varValues) {
+	
 	return value;
 }

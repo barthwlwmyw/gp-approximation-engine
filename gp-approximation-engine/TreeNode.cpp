@@ -24,8 +24,8 @@ void TreeNode::buildSubtree(int dimensions) {
 
 }
 
-void TreeNode::print() {
-	std::cout << "Unspecidfied tree node ";
+std::string TreeNode::toString() {
+	return "Unspecidfied tree node ";
 }
 
 double TreeNode::evaluate(double* varValues) {

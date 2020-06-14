@@ -20,10 +20,8 @@ TreeNode* AdditionNode::clone() {
 	return newNode;
 }
 
-void AdditionNode::print() {
-	std::cout << "+ ";
-	leftChild->print();
-	rightChild->print();
+std::string AdditionNode::toString() {
+	return "+ " + leftChild->toString() + rightChild->toString();
 }
 
 double AdditionNode::evaluate(double* varVals) {

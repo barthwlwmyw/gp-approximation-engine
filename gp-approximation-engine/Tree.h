@@ -24,9 +24,7 @@ public:
 
 	int getTreeSize();
 
-	void print();
-
-	void testBuild();
+	std::string toString();
 
 private:
 

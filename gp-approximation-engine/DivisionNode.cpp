@@ -20,10 +20,8 @@ TreeNode* DivisionNode::clone() {
 	return newNode;
 }
 
-void DivisionNode::print() {
-	std::cout << "/ ";
-	leftChild->print();
-	rightChild->print();
+std::string DivisionNode::toString() {
+	return "/ " + leftChild->toString() + rightChild->toString();
 }
 
 double DivisionNode::evaluate(double* varVals) {
@@ -35,6 +33,6 @@ double DivisionNode::evaluate(double* varVals) {
 		return leftSubtreeResult / rightSubtreeResult;
 	}
 	else {
-		return DBL_MAX/1000;
+		return DBL_MAX;
 	}
 }

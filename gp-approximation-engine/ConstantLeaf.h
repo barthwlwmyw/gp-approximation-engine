@@ -1,5 +1,7 @@
 #pragma once
 #include"Leaf.h"
+#include<string>
+
 class ConstantLeaf :
 	public Leaf
 {
@@ -11,7 +13,7 @@ public:
 
 	TreeNode* clone();
 
-	void print();
+	std::string toString();
 
 	double evaluate(double* varValues);
 

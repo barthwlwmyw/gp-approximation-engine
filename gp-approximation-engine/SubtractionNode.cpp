@@ -20,10 +20,8 @@ TreeNode* SubtractionNode::clone() {
 	return newNode;
 }
 
-void SubtractionNode::print() {
-	std::cout << "- ";
-	leftChild->print();
-	rightChild->print();
+std::string SubtractionNode::toString() {
+	return "- " + leftChild->toString() + rightChild->toString();
 }
 
 double SubtractionNode::evaluate(double* varVals) {

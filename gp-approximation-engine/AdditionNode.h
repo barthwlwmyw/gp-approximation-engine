@@ -11,7 +11,7 @@ public:
 
 	TreeNode* clone();
 
-	void print();
+	std::string toString();
 
 	double evaluate(double* varVals);
 };

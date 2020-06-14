@@ -1,5 +1,7 @@
 #pragma once
 #include "DoubleChildNode.h"
+#include <string>
+
 class SubtractionNode :
 	public DoubleChildNode
 {
@@ -11,7 +13,7 @@ public:
 
 	TreeNode* clone();
 
-	void print();
+	std::string toString();
 
 	double evaluate(double* varVals);
 };

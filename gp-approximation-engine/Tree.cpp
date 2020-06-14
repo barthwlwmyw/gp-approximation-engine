@@ -86,6 +86,6 @@ int Tree::getTreeSize() {
 	return root->getSize();
 }
 
-void Tree::print() {
-	root->print();
+std::string Tree::toString() {
+	return root->toString();
 }

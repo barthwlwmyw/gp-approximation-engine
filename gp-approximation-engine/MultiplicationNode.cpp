@@ -18,10 +18,8 @@ TreeNode* MultiplicationNode::clone() {
 	return newNode;
 }
 
-void MultiplicationNode::print() {
-	std::cout << "* ";
-	leftChild->print();
-	rightChild->print();
+std::string MultiplicationNode::toString() {
+	return "* " + leftChild->toString() + rightChild->toString();
 }
 
 double MultiplicationNode::evaluate(double* varVals) {

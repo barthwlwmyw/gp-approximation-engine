@@ -1,5 +1,7 @@
 #pragma once
 #include "SingleChildNode.h"
+#include <string>
+
 class CosinusNode :
 	public SingleChildNode
 {
@@ -11,7 +13,7 @@ public:
 
 	TreeNode* clone();
 
-	void print();
+	std::string toString();
 
 	double evaluate(double* varVals);
 };

@@ -16,9 +16,9 @@ TreeNode* VariableLeaf::clone() {
 	return newNode;
 }
 
-void VariableLeaf::print() {
+std::string VariableLeaf::toString() {
 
-	std::cout << "VAR[" << variableIdx << "] ";
+	return "X" + std::to_string(variableIdx) + " ";
 }
 
 double VariableLeaf::evaluate(double* varValues) {
