@@ -22,5 +22,5 @@ double SinusNode::evaluate(double* varVals) {
 }
 
 std::string SinusNode::toString() {
-	return "SIN ";
+	return "SIN " + child->toString();
 }

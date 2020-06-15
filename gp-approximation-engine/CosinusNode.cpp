@@ -22,5 +22,5 @@ double CosinusNode::evaluate(double* varVals) {
 }
 
 std::string CosinusNode::toString() {
-	return "COS ";
+	return "COS " + child->toString();
 }
